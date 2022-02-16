@@ -1,20 +1,35 @@
-import { Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Controller, Get, Body, HttpStatus, Post, Res } from '@nestjs/common';
+import { ApiBody, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateTranslationDTO } from './dto/translator.dto';
 import { TranslatorService } from './translator.service';
 
+@ApiTags('Translator')
 @Controller('translator')
 export class TranslatorController {
   constructor(private translatorService: TranslatorService) {}
 
-  @Post('/create')
-  async createTranslation(@Res() res) {
-    return res.status(HttpStatus.OK).json({
-      message: 'OK'
-    });
-  }
-
   @Get('/metadata')
+  @ApiResponse({ status: 200, description: 'Returns used document metadata.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   async getMetadata(@Res() res) {
     const metadata = await this.translatorService.metadata();
     return res.status(HttpStatus.OK).json(metadata);
+  }
+
+  @Post('/')
+  @ApiBody({ type: [CreateTranslationDTO] })
+  @ApiCreatedResponse({ description: 'The translation has been done successfully.' })
+  async createTranslation(@Res() res, @Body() createTranslationDTO: CreateTranslationDTO) {
+    console.log({ createTranslationDTO });
+    const createTranslation = await this.translatorService.createTranslation(createTranslationDTO);
+    return res.status(HttpStatus.OK).json(createTranslation);
+  }
+
+  @Get('/')
+  @ApiResponse({ status: 200, description: 'Returns all translations.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  async getTranslations(@Res() res) {
+    const data = await this.translatorService.traslations();
+    return res.status(HttpStatus.OK).json(data);
   }
 }
