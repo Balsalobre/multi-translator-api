@@ -17,7 +17,7 @@ export class TranslatorController {
   }
 
   @Post('/')
-  @ApiBody({ type: [CreateTranslationDTO] })
+  @ApiBody({ type: CreateTranslationDTO })
   @ApiCreatedResponse({ description: 'The translation has been done successfully.' })
   async createTranslation(@Res() res, @Body() createTranslationDTO: CreateTranslationDTO) {
     console.log({ createTranslationDTO });
