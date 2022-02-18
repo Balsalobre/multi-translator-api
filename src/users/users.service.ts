@@ -17,13 +17,8 @@ export class UsersService {
     return this.usersRepository.find({});
   }
 
-  async createUser(avatarUrl: string, loging: string, name: string): Promise<User> {
-    return this.usersRepository.create({
-      userId: uuidv4(),
-      avatarUrl,
-      loging,
-      name
-    });
+  async createUser(user: User): Promise<User> {
+    return this.usersRepository.create(user);
   }
 
   async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
