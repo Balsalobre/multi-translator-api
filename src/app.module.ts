@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TranslatorModule } from './translator/translator.module';
-import { UserModule } from './user/users.module';
+import { UserModule } from './users/users.module';
 import { DatabaseModule } from './database/database.module';
 
 @Module({
