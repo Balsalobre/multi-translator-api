@@ -2,6 +2,7 @@ import { AggregateRoot } from '@nestjs/cqrs';
 
 export class User extends AggregateRoot {
   constructor(
+    private readonly _id: string,
     private readonly _name: string,
     private readonly _login: string,
     private readonly _avatar_url: string
@@ -19,5 +20,9 @@ export class User extends AggregateRoot {
 
   public get avatar_url(): string {
     return this._avatar_url;
+  }
+
+  public get id(): string {
+    return this._id;
   }
 }

@@ -4,11 +4,11 @@ import { IdentifiableEntitySchema } from 'src/database/identifiable-entity.schem
 @Schema({ versionKey: false, collection: 'users' })
 export class UserSchema extends IdentifiableEntitySchema {
   @Prop()
-  name: string;
+  readonly name: string;
 
   @Prop()
-  login: string;
+  readonly login: string;
 
   @Prop()
-  avatar_url: string;
+  readonly avatar_url: string;
 }

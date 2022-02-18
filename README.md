@@ -50,4 +50,6 @@ Creamos el fichero User.ts como modelo de dominio, en el que pondremos toda la f
 Todas las propiedades de nuestro dominio son privadas y solo el objeto usuario puede acceder a ellas, a diferecia del objeto de transferencia a bbdd "schema" que si se puede mutar y con ello se dificultaría el seguimiento de errores.
 
 ### 4. camper-schema.factory.ts
-Clase que implementa la interfaz
+Clase que implementa la interfaz "EntitySchemaFactory", la cual especifica dos métodos:
+  1. create --> crea un schema de una entidad
+  2. createFromSchema --> crea una entidad a partir de un schema
