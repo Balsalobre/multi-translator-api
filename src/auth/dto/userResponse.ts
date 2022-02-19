@@ -1,6 +1,6 @@
 export class UserResponse {
   readonly id?: number;
-  readonly gitId: number;
+  readonly gitId?: string;
   readonly fullName: string;
   readonly avatarUrl: string;
   readonly userName: string;

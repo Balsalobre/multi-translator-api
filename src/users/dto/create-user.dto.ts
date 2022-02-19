@@ -1,6 +1,6 @@
 export class CreateUserDto {
   id?: number;
-  gitId: number;
+  gitId: string;
   fullName: string;
   avatarUrl: string;
   userName: string;

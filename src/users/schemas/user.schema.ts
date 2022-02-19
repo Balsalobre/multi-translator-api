@@ -6,19 +6,19 @@ export type UserDocument = User & Document;
 @Schema({ collection: 'users', timestamps: true })
 export class User implements IUser {
   @Prop()
-  gitId: number;
+  readonly gitId: string;
 
   @Prop()
-  fullName: string;
+  readonly fullName: string;
 
   @Prop()
-  avatarUrl: string;
+  readonly avatarUrl: string;
 
   @Prop()
-  isActive: boolean;
+  readonly isActive: boolean;
 
   @Prop()
-  userName: string;
+  readonly userName: string;
 
   // @Prop()
   // provider: string;

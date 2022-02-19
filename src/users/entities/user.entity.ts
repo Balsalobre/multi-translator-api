@@ -1,5 +1,5 @@
 export interface IUser {
-  gitId: number;
+  gitId?: string;
   fullName: string;
   avatarUrl: string;
   userName: string | null;
