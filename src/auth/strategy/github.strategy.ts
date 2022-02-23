@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-github2';
 import { UserResponse } from '../dto/userResponse';
-import { UsersService } from '../../users/users.service';
 import { TokenService } from '../../token/token.service';
 import { AuthService } from '../auth.service';
+import { UserDocument } from '../../users/schemas/user.schema';
 
 @Injectable()
 export class GithubStrategy extends PassportStrategy(Strategy) {
@@ -22,11 +22,14 @@ export class GithubStrategy extends PassportStrategy(Strategy) {
     profile: Profile
   ): Promise<UserResponse> {
     const { id } = profile;
-    const user = await this.authService.validateUser(id);
+    const user = (await this.authService.validateUser(id)) as UserDocument;
     if (!user) {
       const newUser = await this.authService.createUserFromGithub(profile);
       return new UserResponse({ ...newUser, token: this.tokenService.createToken(user) });
     }
-    return new UserResponse({ ...user, token: this.tokenService.createToken(user) });
+    return new UserResponse({
+      ...user.toJSON(),
+      token: this.tokenService.createToken(user)
+    });
   }
 }

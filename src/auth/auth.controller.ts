@@ -14,19 +14,20 @@ export class AuthController {
 
   @UseGuards(GithubGuard)
   @Get('/login')
-  loginByGithub(@User() user: UserResponse) {
-    return;
+  loginByGithub() {
+    // github login
   }
 
+  // Documentation: (for example, by injecting the response object to only set cookies/headers but still leave the rest to the framework),
+  // you must set the passthrough option to true in the @Res({ passthrough: true }) decorator.
   @UseGuards(GithubGuard)
   @Get('/github/callback')
-  async githubCallback(@User() user: UserResponse, @Res({ passthrough: true }) response) {
-    response.cookie('token', user.token, {
-      maxAge: 603800,
-      httpOnly: true
+  async githubCallback(@User() user: UserResponse, @Res({ passthrough: true }) res) {
+    res.cookie('token', user.token, {
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 7
     });
-    return `<script>window.opener.postMessage('${JSON.stringify(
-      user
-    )}','*');window.close();</script>`;
+
+    console.log({ cookie: res.cookie('token') });
   }
 }
