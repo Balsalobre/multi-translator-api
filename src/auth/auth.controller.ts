@@ -6,16 +6,12 @@ import { UserResponse } from './dto/userResponse';
 
 @Controller('auth')
 export class AuthController {
-  private authService: AuthService;
-
-  constructor(authService: AuthService) {
-    this.authService = authService;
-  }
+  constructor(private authService: AuthService) {}
 
   @UseGuards(GithubGuard)
-  @Get('/login')
-  loginByGithub() {
-    // github login
+  @Get('/github')
+  loginByGithub(): void {
+    return;
   }
 
   // Documentation: (for example, by injecting the response object to only set cookies/headers but still leave the rest to the framework),
@@ -27,7 +23,11 @@ export class AuthController {
       httpOnly: true,
       maxAge: 60 * 60 * 24 * 7
     });
-
-    console.log({ cookie: res.cookie('token') });
+    return { token: user.token };
   }
+
+  // @Get('signout')
+  // getSignOut(@Req() req: Request) {
+  //   return this.authService.signout(req);
+  // }
 }

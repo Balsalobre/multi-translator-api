@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle('Multi-traslator')
     .setDescription('The translator of multiple languages which will save you time')
     .setVersion('1.0')
+    .addCookieAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

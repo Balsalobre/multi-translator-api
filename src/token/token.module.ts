@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TokenService } from './token.service';
-import { JwtStrategy } from './token.stratege';
+import { JwtStrategy } from './token.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
