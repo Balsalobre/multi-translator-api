@@ -24,7 +24,7 @@ export class UsersController {
 
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    const user: User = { ...createUserDto, isActive: false };
+    const user: User = { ...createUserDto };
     return this.usersService.createUser(user);
   }
 

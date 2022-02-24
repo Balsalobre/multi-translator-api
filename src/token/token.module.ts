@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TokenService } from './token.service';
-import { JwtStrategy } from './token.strategy';
+import { AccessJwtStrategy, RefreshJwtStrategy } from './strategies/index';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  providers: [TokenService, JwtStrategy],
+  providers: [TokenService, AccessJwtStrategy, RefreshJwtStrategy],
   imports: [
     ConfigModule,
     JwtModule.registerAsync({
@@ -15,7 +16,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         signOptions: { expiresIn: '60h' }
       }),
       inject: [ConfigService]
-    })
+    }),
+    UsersModule
   ],
   exports: [TokenService, JwtModule]
 })

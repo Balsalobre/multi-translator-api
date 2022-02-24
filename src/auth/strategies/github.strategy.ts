@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-github2';
-import { UserResponse } from '../dto/userResponse';
+import { UserResponseDto } from '../dto/userResponse';
 import { TokenService } from '../../token/token.service';
 import { AuthService } from '../auth.service';
 import { UserDocument } from '../../users/schemas/user.schema';
@@ -20,16 +20,19 @@ export class GithubStrategy extends PassportStrategy(Strategy) {
     accessToken: string,
     refreshToken: string,
     profile: Profile
-  ): Promise<UserResponse> {
+  ): Promise<UserResponseDto> {
+    if (!profile) throw new ForbiddenException('Access Denied');
     const { id } = profile;
     const user = (await this.authService.validateUser(id)) as UserDocument;
     if (!user) {
       const newUser = await this.authService.createUserFromGithub(profile);
-      return new UserResponse({ ...newUser, token: this.tokenService.createToken(user) });
+      const tokens = await this.tokenService.getTokens(newUser);
+      return new UserResponseDto({ ...newUser, tokens });
     }
-    return new UserResponse({
+
+    return new UserResponseDto({
       ...user.toJSON(),
-      token: this.tokenService.createToken(user)
+      tokens: await this.tokenService.getTokens(user)
     });
   }
 }

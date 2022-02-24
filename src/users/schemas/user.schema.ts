@@ -15,13 +15,13 @@ export class User implements IUser {
   readonly avatarUrl: string;
 
   @Prop()
-  readonly isActive: boolean;
-
-  @Prop()
   readonly userName: string;
 
-  // @Prop()
-  // provider: string;
+  @Prop()
+  readonly provider: string;
+
+  @Prop()
+  readonly hashedRefreshToken?: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

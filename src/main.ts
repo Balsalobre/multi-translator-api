@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder, SwaggerCustomOptions } from '@nestjs/swagger';
 
@@ -12,16 +13,15 @@ async function bootstrap() {
     .setVersion('1.0')
     .addCookieAuth()
     .build();
-
   const document = SwaggerModule.createDocument(app, config);
-
   const customOptions: SwaggerCustomOptions = {
     swaggerOptions: {
       persistAuthorization: true
     }
   };
-
   SwaggerModule.setup('api', app, document, customOptions);
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(parseInt(process.env.PORT, 10) || 3000);
 }

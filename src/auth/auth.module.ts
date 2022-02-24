@@ -4,7 +4,7 @@ import TokenModule from '../token/token.module';
 import { UsersModule } from '../users/users.module';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { GithubStrategy } from './strategy/github.strategy';
+import { GithubStrategy } from './strategies/github.strategy';
 
 @Module({
   imports: [UsersModule, TokenModule, ConfigModule],

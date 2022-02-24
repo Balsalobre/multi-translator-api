@@ -1,33 +1,45 @@
-import { Controller, Get, Res, UseGuards } from '@nestjs/common';
-import GithubGuard from '../common/guards/github.guard';
+import { Controller, Get, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { GithubGuard, RtGuard } from '../common/guards';
 import { User } from '../common/decorators/User';
 import { AuthService } from './auth.service';
-import { UserResponse } from './dto/userResponse';
+import { UserResponseDto } from './dto/userResponse';
+import { Tokens } from '../token/types/index';
+import { GetCurrentUserId, GetCurrentUser, Public } from '../common/decorators';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @UseGuards(GithubGuard)
-  @Get('/github')
+  @Get('github')
+  @HttpCode(HttpStatus.CREATED)
   loginByGithub(): void {
     return;
   }
 
-  // Documentation: (for example, by injecting the response object to only set cookies/headers but still leave the rest to the framework),
-  // you must set the passthrough option to true in the @Res({ passthrough: true }) decorator.
+  @Public()
   @UseGuards(GithubGuard)
-  @Get('/github/callback')
-  async githubCallback(@User() user: UserResponse, @Res({ passthrough: true }) res) {
-    res.cookie('token', user.token, {
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 7
-    });
-    return { token: user.token };
+  @Get('github/callback')
+  @HttpCode(HttpStatus.OK)
+  async githubCallback(@User() user: UserResponseDto): Promise<Tokens> {
+    return { ...user.tokens };
   }
 
-  // @Get('signout')
-  // getSignOut(@Req() req: Request) {
-  //   return this.authService.signout(req);
-  // }
+  @Post('logout')
+  @HttpCode(HttpStatus.OK)
+  logout(@GetCurrentUserId() userId: string): Promise<void> {
+    return this.authService.logout(userId);
+  }
+
+  @Public()
+  @UseGuards(RtGuard)
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  refreshTokens(
+    @GetCurrentUserId() userId: string,
+    @GetCurrentUser('refreshToken') refreshToken: string
+  ): Promise<Tokens> {
+    return this.authService.refreshTokens(userId, refreshToken);
+  }
 }

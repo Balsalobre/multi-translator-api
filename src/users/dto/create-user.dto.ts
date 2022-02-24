@@ -4,5 +4,6 @@ export class CreateUserDto {
   fullName: string;
   avatarUrl: string;
   userName: string;
+  provider: string;
   token?: string;
 }
