@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { google, sheets_v4 } from 'googleapis';
 import { resolve } from 'path';
 import { GoogleAuth } from 'googleapis-common';
-import { CreateTranslationDTO } from './dto/translator.dto';
+import { CreateTranslationDto } from './dto/translator.dto';
 @Injectable()
 export class TranslatorService {
   private auth: GoogleAuth;
@@ -48,7 +48,7 @@ export class TranslatorService {
     return data;
   }
 
-  async createTranslation(translation: CreateTranslationDTO) {
+  async createTranslation(translation: CreateTranslationDto) {
     const { sourceLanguage, text } = translation;
     const client = await this.googleSheetsClient();
     const update = await client.spreadsheets.values.update({

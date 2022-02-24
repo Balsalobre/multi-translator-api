@@ -1,6 +1,6 @@
 import { Controller, Get, Body, HttpStatus, Post, Res } from '@nestjs/common';
 import { ApiBody, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateTranslationDTO } from './dto/translator.dto';
+import { CreateTranslationDto } from './dto/translator.dto';
 import { TranslatorService } from './translator.service';
 
 @ApiTags('Translator')
@@ -17,9 +17,9 @@ export class TranslatorController {
   }
 
   @Post('/')
-  @ApiBody({ type: CreateTranslationDTO })
+  @ApiBody({ type: CreateTranslationDto })
   @ApiCreatedResponse({ description: 'The translation has been done successfully.' })
-  async createTranslation(@Res() res, @Body() createTranslationDTO: CreateTranslationDTO) {
+  async createTranslation(@Res() res, @Body() createTranslationDTO: CreateTranslationDto) {
     console.log({ createTranslationDTO });
     const createTranslation = await this.translatorService.createTranslation(createTranslationDTO);
     return res.status(HttpStatus.OK).json(createTranslation);

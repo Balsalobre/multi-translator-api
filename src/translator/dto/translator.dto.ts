@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsNotEmpty } from 'class-validator';
 
-export class CreateTranslationDTO {
+export class CreateTranslationDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
   @IsString()
