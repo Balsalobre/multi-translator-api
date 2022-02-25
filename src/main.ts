@@ -8,10 +8,19 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
+    .addBearerAuth(
+      {
+        description: 'Default JWT Authorization',
+        type: 'http',
+        in: 'header',
+        scheme: 'bearer',
+        bearerFormat: 'JWT'
+      },
+      'access-token'
+    )
     .setTitle('Multi-traslator')
     .setDescription('The translator of multiple languages which will save you time')
     .setVersion('1.0')
-    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   const customOptions: SwaggerCustomOptions = {

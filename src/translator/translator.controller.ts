@@ -1,9 +1,10 @@
 import { Controller, Get, Body, HttpStatus, Post, Res } from '@nestjs/common';
-import { ApiBody, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateTranslationDto } from './dto/translator.dto';
 import { TranslatorService } from './translator.service';
 
 @ApiTags('Translator')
+@ApiBearerAuth('access-token')
 @Controller('translator')
 export class TranslatorController {
   constructor(private translatorService: TranslatorService) {}

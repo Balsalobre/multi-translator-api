@@ -5,7 +5,9 @@ import { AuthService } from './auth.service';
 import { UserResponseDto } from './dto/userResponse';
 import { Tokens } from '../token/types/index';
 import { GetCurrentUserId, GetCurrentUser, Public } from '../common/decorators';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -27,6 +29,7 @@ export class AuthController {
   }
 
   @Post('logout')
+  @ApiBearerAuth('access-token')
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUserId() userId: string): Promise<void> {
     return this.authService.logout(userId);
