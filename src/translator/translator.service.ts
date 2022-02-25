@@ -38,14 +38,15 @@ export class TranslatorService {
     }
   }
 
-  async traslations() {
+  async getTraslations() {
     const client = await this.googleSheetsClient();
     const { data } = await client.spreadsheets.values.get({
       auth: this.auth,
       spreadsheetId: this.spreadsheetId,
-      range: 'Sheet1'
+      range: 'Sheet1!A2:B11'
     });
-    return data;
+    const translations = data.values.map((x) => ({ language: x[0], text: x[1] }));
+    return translations;
   }
 
   async createTranslation(translation: CreateTranslationDto) {

@@ -30,7 +30,7 @@ export class TranslatorController {
   @ApiResponse({ status: 200, description: 'Returns all translations.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   async getTranslations(@Res() res) {
-    const data = await this.translatorService.traslations();
+    const data = await this.translatorService.getTraslations();
     return res.status(HttpStatus.OK).json(data);
   }
 }
