@@ -27,7 +27,7 @@ services:
             dockerfile: ./Dockerfile
         command: npm run start:prod
         ports:
-            - ${PORT}:${PORT}
+            - "${PORT}:${PORT}"
             - 9229:9229
         networks:
             - nesjs-network
