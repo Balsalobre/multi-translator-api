@@ -36,6 +36,7 @@ lerna-debug.log*
 
 # Secrets
 .env
+.env.prod
 /src/config/*
 
 # Docker mongo volumen data
