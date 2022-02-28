@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "368f20a0-d857-461f-aca8-25d545b06a8a",
+		"name": "MULTI-TRANSLATOR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "USERS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTA4ZjhjNjMwODVkMzM2OTkzMjU2NSIsInVzZXJOYW1lIjoiQmFsc2Fsb2JyZSIsImdpdElkIjoiMzc5Mjk5MjkiLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMzc5Mjk5Mjk_dj00IiwiZnVsbE5hbWUiOiJDYXJsb3MgQmFsc2Fsb2JyZSBPcmVuZXMiLCJpYXQiOjE2NDU2NDMxNTUsImV4cCI6MTY0NTg1OTE1NX0.9H3VUZCosB9L18egduKXrSode0g5HVvkcjjDz_fM9Bg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5300/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5300",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "LOGOUT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTc5ZmRhOTY4N2E1MzhjMjk5MmM1NSIsInVzZXJOYW1lIjoiQmFsc2Fsb2JyZSIsImdpdElkIjoiMzc5Mjk5MjkiLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMzc5Mjk5Mjk_dj00IiwiZnVsbE5hbWUiOiJDYXJsb3MgQmFsc2Fsb2JyZSBPcmVuZXMiLCJpYXQiOjE2NDU3MjkyODEsImV4cCI6MTY0NTczMDE4MX0.SyadCnmO3WzQ4Z4Z0o3NKO2lTA_Ue7R3I4Z04TmiDr0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5300/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5300",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5300/auth/github",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5300",
+							"path": [
+								"auth",
+								"github"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTc5ZmRhOTY4N2E1MzhjMjk5MmM1NSIsInVzZXJOYW1lIjoiQmFsc2Fsb2JyZSIsImdpdElkIjoiMzc5Mjk5MjkiLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMzc5Mjk5Mjk_dj00IiwiZnVsbE5hbWUiOiJDYXJsb3MgQmFsc2Fsb2JyZSBPcmVuZXMiLCJpYXQiOjE2NDU3ODUxNTksImV4cCI6MTY0NjM4OTk1OX0.TRyMMifKPvPEMyIwVnZUb9NBgnrxDVcXrqqaPRNXfbk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5300/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5300",
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROOT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5300"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE_TRADUCTIONS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5300/translator/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5300",
+					"path": [
+						"translator",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "METADATA",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTc5ZmRhOTY4N2E1MzhjMjk5MmM1NSIsInVzZXJOYW1lIjoiQmFsc2Fsb2JyZSIsImdpdElkIjoiMzc5Mjk5MjkiLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMzc5Mjk5Mjk_dj00IiwiZnVsbE5hbWUiOiJDYXJsb3MgQmFsc2Fsb2JyZSBPcmVuZXMiLCJpYXQiOjE2NDU3ODU2MDgsImV4cCI6MTY0NTc4NjUwOH0.MMBMtiBOKUXlXAmONUqX2CNW2BwJO0U0nPHnuZ9nJD0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5300/translator/metadata",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5300",
+					"path": [
+						"translator",
+						"metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET_TRADUCTIONS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTc5ZmRhOTY4N2E1MzhjMjk5MmM1NSIsInVzZXJOYW1lIjoiQmFsc2Fsb2JyZSIsImdpdElkIjoiMzc5Mjk5MjkiLCJhdmF0YXJVcmwiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMzc5Mjk5Mjk_dj00IiwiZnVsbE5hbWUiOiJDYXJsb3MgQmFsc2Fsb2JyZSBPcmVuZXMiLCJpYXQiOjE2NDU3ODUxOTAsImV4cCI6MTY0NTc4NjA5MH0.09k5X6VaAQobwm4I8apDpfcGCJ2hgBzyR5wN8_ydOHY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5300/translator/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5300",
+					"path": [
+						"translator",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
