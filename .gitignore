@@ -38,6 +38,7 @@ lerna-debug.log*
 .env
 .env.prod
 /src/config/*
+/mongo_prod
 
 # Docker mongo volumen data
 /mongo_volume_data

@@ -1,3 +1,7 @@
+# Docker Multistage construction 
+
+### DEV Environmental Science  ###
+
 FROM node:16.13.1-alpine3.14 AS development
 
 WORKDIR /usr/src/app
@@ -11,6 +15,8 @@ RUN npm install --only=development
 COPY . .
 
 RUN npm run build
+
+### PROD Environmental Science  ###
 
 FROM node:16.13.1-alpine3.14 as production
 
