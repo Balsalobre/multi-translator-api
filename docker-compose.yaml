@@ -1,5 +1,9 @@
 version: '3.8'
 
+# networks: 
+#   nesjs-network: 
+#     name: nesjs-network 
+
 services:
     dev:
         container_name: nestjs_api_dev
@@ -12,28 +16,10 @@ services:
         ports:
             - "${PORT}:${PORT}"
             - 9229:9229
-        links:
-            - mongo:mongo
-        networks:
-            - nesjs-network
         volumes:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
-    
-    mongo:
-        image : mongo:latest
-        container_name: mongotranslator
-        volumes:
-            - ./mongo_volume_data:/data/db
-        ports:
-            - "${MONGO_INITDB_PORT}:27017"
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: "${MONGO_INITDB_ROOT_USERNAME}"
-            MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
-        networks:
-            - nesjs-network
-        restart: always
 
     prod:
         container_name: nestjs_api_prod
@@ -46,15 +32,8 @@ services:
         ports:
             - "${PORT}:${PORT}"
             - 9229:9229
-        links:
-            - mongo:mongo
-        networks:
-            - nesjs-network
         volumes:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
-        depends_on:
-            - "mongo"
-networks:
-    nesjs-network:
+
