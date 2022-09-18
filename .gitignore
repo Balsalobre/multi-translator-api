@@ -41,4 +41,4 @@ lerna-debug.log*
 /mongo_prod
 
 # Docker mongo volumen data
-/mongo_volume_data
+/mongo_dev/mongo_volume_data/*
