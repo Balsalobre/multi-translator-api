@@ -21,11 +21,11 @@ export class TokenService {
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
         secret: process.env.PRIVATE_AJWT_KEY,
-        expiresIn: 60 * 15 // 15 min
+        expiresIn: 60 * 15
       }),
       this.jwtService.signAsync(payload, {
         secret: process.env.PRIVATE_RJWT_KEY,
-        expiresIn: 60 * 60 * 24 * 7 // 15 min
+        expiresIn: 60 * 60 * 24 * 7
       })
     ]);
     await this.updateRtHash(user.gitId, refreshToken);

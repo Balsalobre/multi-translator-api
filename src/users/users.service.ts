@@ -23,4 +23,8 @@ export class UsersService {
   async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
     return this.usersRepository.findOneAndUpdate({ userId }, userUpdates);
   }
+
+  async deleteUser(userId: string): Promise<boolean> {
+    return this.usersRepository.deleteOne({ userId });
+  }
 }
